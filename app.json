@@ -1,0 +1,12 @@
+{
+  "name": "poc-styledcomponents",
+  "displayName": "poc-styledcomponents",
+  "expo": {
+    "name": "poc-styledcomponents",
+    "slug": "poc-styledcomponents",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
