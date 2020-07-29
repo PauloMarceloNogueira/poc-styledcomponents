@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
-import {ThemeProvider} from "styled-components";
+import { ThemeProvider } from "styled-components";
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, ScrollView, SafeAreaView, Share ,TouchableOpacity, Appearance} from 'react-native';
+import { StyleSheet, Text, View, ScrollView, SafeAreaView, Share, TouchableOpacity, Appearance } from 'react-native';
 import Button from './src/Components/Button';
 import { lightTheme, darkTheme } from './src/Components/Theme';
 
@@ -12,8 +12,9 @@ export default function App() {
     themeToggler()
   })
   const themeToggler = () => {
-    theme === 'light' ? setTheme('dark') : setTheme(colorScheme)}
-  
+    theme === 'light' ? setTheme('dark') : setTheme(colorScheme)
+  }
+
 
   const onShare = async () => {
     try {
@@ -34,9 +35,11 @@ export default function App() {
       alert(error.message);
     }
   };
-  
+
+  const styleTheme = theme === 'light' ? lightTheme : darkTheme
+
   return (
-    <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+    <ThemeProvider theme={{ mode: theme, ...styleTheme }}>
       <SafeAreaView >
         <ScrollView >
           <View style={styles.header}>
@@ -45,13 +48,13 @@ export default function App() {
             </TouchableOpacity>
           </View>
           <View style={styles.container}>
-            <Button type={'Primary'} text="Primary Button" handleFc={onShare}/>
-            <Button type={'Secondary'} text="Secondary Button"/>
-            <Button type={'OutlinePrimary'} text="Primary Button Outline"/>
-            <Button type={'OutlineSecondary'} text="Secondary Button Outline"/>
-            <Button type={'Ghost'} text="Ghost Button"/>
+            <Button type={'Primary'} text="Primary Button" handleFc={onShare} />
+            <Button type={'Secondary'} text="Secondary Button" />
+            <Button type={'OutlinePrimary'} text="Primary Button Outline" />
+            <Button type={'OutlineSecondary'} text="Secondary Button Outline" />
+            <Button type={'Ghost'} text="Ghost Button" />
           </View>
-          
+
         </ScrollView>
       </SafeAreaView>
     </ThemeProvider>
@@ -61,7 +64,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
