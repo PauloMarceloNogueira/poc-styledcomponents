@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
-import { View } from 'react-native';
-import { ButtonDefault, TextButton } from './styles';
+import { ButtonDefault, TextButton } from './Button.styles';
 
 // import { Container } from './styles';
 
@@ -19,13 +18,11 @@ interface ButtonI {
   outline?: boolean
 }
 
-const Button: React.FC<ButtonI> = ({type, handleFc, text, outline}) => {
-  
-  return <Fragment>
-      <ButtonDefault variant={type} onPress={handleFc}>
-        <TextButton variant={type}>{text}</TextButton>
-      </ButtonDefault>
-  </Fragment> 
-}
+export const Button: React.FC<ButtonI> = ({ type, handleFc, text }) => {
 
-export default Button;
+  return <Fragment>
+    <ButtonDefault variant={type} onPress={handleFc}>
+      <TextButton variant={type}>{text}</TextButton>
+    </ButtonDefault>
+  </Fragment>
+}

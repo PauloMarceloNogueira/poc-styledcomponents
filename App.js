@@ -1,9 +1,8 @@
-import { StatusBar } from 'expo-status-bar';
 import { ThemeProvider } from "styled-components";
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, ScrollView, SafeAreaView, Share, TouchableOpacity, Appearance } from 'react-native';
-import Button from './src/Components/Button';
-import { lightTheme, darkTheme } from './src/Components/Theme';
+import React, { useState } from 'react';
+import { StyleSheet, View, ScrollView, Share, Appearance, StatusBar } from 'react-native';
+import { AppBar, Button } from './src/Components';
+import { lightTheme, darkTheme } from './src/Styles';
 
 export default function App() {
   const [theme, setTheme] = useState('light');
@@ -14,7 +13,6 @@ export default function App() {
   const themeToggler = () => {
     theme === 'light' ? setTheme('dark') : setTheme(colorScheme)
   }
-
 
   const onShare = async () => {
     try {
@@ -36,27 +34,25 @@ export default function App() {
     }
   };
 
-  const styleTheme = theme === 'light' ? lightTheme : darkTheme
+  const isLight = theme === 'light'
+  const styleTheme = isLight ? lightTheme : darkTheme
 
   return (
     <ThemeProvider theme={{ mode: theme, ...styleTheme }}>
-      <SafeAreaView >
-        <ScrollView >
-          <View style={styles.header}>
-            <TouchableOpacity onPress={themeToggler}>
-              <Text>Alterar Theme</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.container}>
-            <Button type={'Primary'} text="Primary Button" handleFc={onShare} />
-            <Button type={'Secondary'} text="Secondary Button" />
-            <Button type={'OutlinePrimary'} text="Primary Button Outline" />
-            <Button type={'OutlineSecondary'} text="Secondary Button Outline" />
-            <Button type={'Ghost'} text="Ghost Button" />
-          </View>
+      <StatusBar barStyle='light-content' />
+      <ScrollView style={{ backgroundColor: isLight ? '#fff' : '#000', flex: 1 }}>
 
-        </ScrollView>
-      </SafeAreaView>
+        <AppBar title='Dark Mode' handleFc={themeToggler} />
+
+        <View style={styles.container}>
+          <Button type={'Primary'} text="Primary Button" handleFc={onShare} />
+          <Button type={'Secondary'} text="Secondary Button" />
+          <Button type={'OutlinePrimary'} text="Primary Button Outline" />
+          <Button type={'OutlineSecondary'} text="Secondary Button Outline" />
+          <Button type={'Ghost'} text="Ghost Button" />
+        </View>
+
+      </ScrollView>
     </ThemeProvider>
   );
 }
@@ -66,12 +62,5 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  header: {
-    width: '100%',
-    display: 'flex',
-    alignItems: 'flex-end',
-    justifyContent: 'center',
-    paddingRight: 34
   }
 });

@@ -13,16 +13,17 @@ export const ButtonDefault = styled.TouchableOpacity<IButton>`
   align-items: center;
   justify-content: center;
   margin: 18px 0;
-  background-color: ${({ theme, variant }) => styles(theme)[variant]?.bg || 'transparent'}
-  border: ${({ theme, variant }) => styles(theme)[variant]?.border || 'none'}
+  background-color: ${({ theme, variant }) => styles(theme, variant)?.bg || 'transparent'}
+  border: ${({ theme, variant }) => styles(theme, variant)?.border || 'none'}
 `;
 
 export const TextButton = styled.Text<IButton>`
-  color: ${({ theme, variant }) => styles(theme)[variant]?.color || '#000'}
+  color: ${({ theme, variant }) => styles(theme, variant)?.color || '#000'}
   font-size: 18px;
+  font-weight: 600;
 `
 
-function styles({ colors }: any) {
+function styles({ colors }: any, variant: any) {
   const theme = {
     Primary: {
       bg: colors.primary,
@@ -33,21 +34,21 @@ function styles({ colors }: any) {
       color: colors.white
     },
     OutlinePrimary: {
-      bg: 'transparent',
+      bg: colors.white,
       border: `1px solid ${colors.primary}`,
-      color: colors.secondary
+      color: colors.primary
     },
     OutlineSecondary: {
-      bg: 'transparent',
+      bg: colors.white,
       border: `1px solid ${colors.secondary}`,
-      color: colors.primary
+      color: colors.secondary
     },
     Ghost: {
       color: colors.black
     }
   }
 
-  return theme
+  return theme[variant]
 }
 
 
